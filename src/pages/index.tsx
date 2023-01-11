@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { getSession } from "@auth0/nextjs-auth0";
+import { getAccessToken, getSession } from "@auth0/nextjs-auth0";
 import { GetServerSideProps } from "next/types";
 
 export default function Home() {
@@ -9,7 +9,10 @@ export default function Home() {
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req, res);
 
-  if (!session) {
+  const token = await getAccessToken(req, res);
+  console.log(token);
+
+  if (!session || !token) {
     return {
       redirect: {
         destination: "/api/auth/login",
@@ -24,4 +27,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       },
     };
   }
+
+  return {
+    props: {},
+  };
 };
