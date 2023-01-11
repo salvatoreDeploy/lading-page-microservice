@@ -1,13 +1,16 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { gql, useQuery } from "@apollo/client";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useGetProductsQuery } from "../../graphql/generated/graphql";
+
+import {
+  getServerPageGetProducts,
+  ssrGetProducts,
+} from "../../graphql/generated/page";
 import { withApollo } from "../../lib/withApollo";
 
-function Home() {
+function Home({ data }: any) {
   const { user } = useUser();
-  const { data, loading, error } = useGetProductsQuery();
+  //const { data, loading, error } = useGetProductsQuery();
 
   return (
     <div>
@@ -20,11 +23,9 @@ function Home() {
 }
 
 export const getServerSideProps = withPageAuthRequired({
-  getServerSideProps: async ({ req, res }) => {
-    return {
-      props: {},
-    };
+  getServerSideProps: async (ctx) => {
+    return await getServerPageGetProducts({}, ctx);
   },
 });
 
-export default withApollo(Home);
+export default withApollo(ssrGetProducts.withPage()(Home));

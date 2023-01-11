@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import * as Types from "./graphql";
 
 import * as Operations from "./graphql";
