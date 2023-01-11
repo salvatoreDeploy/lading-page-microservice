@@ -2,13 +2,12 @@
 import { gql, useQuery } from "@apollo/client";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { useGetProductsQuery } from "../../graphql/generated/graphql";
 import { withApollo } from "../../lib/withApollo";
-
-const PRODUCTS_QUERY = gql``;
 
 function Home() {
   const { user } = useUser();
-  const { data, loading, error } = useQuery(PRODUCTS_QUERY);
+  const { data, loading, error } = useGetProductsQuery();
 
   return (
     <div>
