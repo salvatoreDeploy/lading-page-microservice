@@ -15,7 +15,7 @@ function Home({ data }: any) {
   const { data: me } = useMeQuery();
 
   return (
-    <div>
+    <div className="text-blue-500">
       <h1>Bem Vindo</h1>
       <pre>{JSON.stringify(me, null, 2)}</pre>
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
