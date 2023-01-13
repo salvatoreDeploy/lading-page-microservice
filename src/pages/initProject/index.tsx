@@ -1,3 +1,4 @@
+/* Pasta initProject -  antiga pasta app - para inicio do projeto */
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { useUser } from "@auth0/nextjs-auth0/client";
